@@ -4,6 +4,10 @@
 
 <a name="readme-top"></a>
 
+
+https://user-images.githubusercontent.com/100721103/200149633-373db975-c47f-43a7-9288-f6cbd16e0410.mp4
+
+<br><br>
 <!-- Project Shields -->
 <div align="center">
 
@@ -15,14 +19,6 @@
 
 </div>
 
-<!-- Project Logo -->
-<br />
-<div align="center">
-    <video width="320" height="240" autoplay>
-  <source src="./static/videos/videoo.mp4" type="video/mp4">
-</video>
-</div>
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <br />
 
 <div>
@@ -30,7 +26,6 @@
     <a href="https://github.com/engrmarkk/My_Blog_Project#readme"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <a href="https://github.com/engrmarkk/My_Blog_Project/blob/main/static/screen-light.png">View Demo</a>  
     ·
     <a href="https://github.com/engrmarkk/My_Blog_Project/issues">Report Bug</a>
@@ -174,7 +169,7 @@ Python3: [Get Python](https://www.python.org/downloads/)
 <br/>
 <p>Dark Mode</p>
 
-[![My Blog Project Screenshot][my_blog_project-screenshot]](https://github.com/engrmarkk/My_Blog_Project/blob/main/static/images/screen-dark.png)
+[![My Blog Project Screenshot][my_blog_project-screenshot2]](https://github.com/engrmarkk/My_Blog_Project/blob/main/static/images/screen-dark.png)
 
 <br/>
 
@@ -225,6 +220,7 @@ This project was made possible by:
 [twitter-shield]: https://img.shields.io/badge/-@iamengrmark-1ca0f1?style=for-the-badge&logo=twitter&logoColor=white&link=https://twitter.com/iamengrmark
 [twitter-url]: https://twitter.com/iamengrmark
 [my_blog_project-screenshot]: static/images/screen-light.png
+[my_blog_project-screenshot2]: static/images/screen-dark.png
 [python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [flask]: https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white
 [jinja]: https://img.shields.io/badge/jinja-white.svg?style=for-the-badge&logo=jinja&logoColor=black
