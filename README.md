@@ -169,7 +169,7 @@ Python3: [Get Python](https://www.python.org/downloads/)
 <br/>
 <p>Dark Mode</p>
 
-[![My Blog Project Screenshot][my_blog_project-screenshot]](https://github.com/engrmarkk/My_Blog_Project/blob/main/static/images/screen-dark.png)
+[![My Blog Project Screenshot][my_blog_project-screenshot2]](https://github.com/engrmarkk/My_Blog_Project/blob/main/static/images/screen-dark.png)
 
 <br/>
 
@@ -220,6 +220,7 @@ This project was made possible by:
 [twitter-shield]: https://img.shields.io/badge/-@iamengrmark-1ca0f1?style=for-the-badge&logo=twitter&logoColor=white&link=https://twitter.com/iamengrmark
 [twitter-url]: https://twitter.com/iamengrmark
 [my_blog_project-screenshot]: static/images/screen-light.png
+[my_blog_project-screenshot2]: static/images/screen-dark.png
 [python]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
 [flask]: https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white
 [jinja]: https://img.shields.io/badge/jinja-white.svg?style=for-the-badge&logo=jinja&logoColor=black
