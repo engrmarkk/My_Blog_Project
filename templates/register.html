@@ -1,0 +1,86 @@
+{% extends 'base.html' %} 
+{% block title %}Registration Page{% endblock title %}
+{% block content %}
+
+<form
+  action="/register"
+  method="post"
+  class="w-100 p-5"
+  style="
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-top: 3px solid lightblue;
+  "
+>
+  <h1 class="text-muted">Register</h1>
+  {{ form.hidden_tag() }}
+
+  <!-- For First Name validations -->
+  <!-- {{ form.firstname.label(class='label') }} -->
+  {% if form.firstname.errors %} {{ form.firstname(class="form-control p-3
+  mt-4", required=False, placeholder="Enter firstname") }} {% for error in
+  form.firstname.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.firstname(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter First Name") }} {% endif %}
+
+  <!-- For Last name validations -->
+  <!-- {{ form.lastname.label(class='label') }} -->
+  {% if form.lastname.errors %} {{ form.lastname(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter Last Name") }} {% for error in
+  form.lastname.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.lastname(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter Last Name") }} {% endif %}
+
+  <!-- For Username Validations -->
+  <!-- {{ form.username.label(class='label') }} -->
+  {% if form.username.errors %} {{ form.username(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter Username") }} {% for error in
+  form.username.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.username(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter Username") }} {% endif %}
+
+  <!-- For Emails validations -->
+  <!-- {{ form.email.label(class='label') }} -->
+  {% if form.email.errors %} {{ form.email(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter email") }} {% for error in
+  form.email.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.email(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter email") }} {% endif %}
+
+  <!-- For Password validations -->
+  <!-- {{ form.password.label(class='label') }} -->
+  {% if form.password.errors %} {{ form.password(class="form-control p-3 mt-4
+  lead", required=False, placeholder='Enter password') }} {% for error in
+  form.password.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.password(class="form-control p-3 mt-4 lead",
+  required=False, placeholder='Enter password') }} {% endif %}
+
+  <!-- For Confirm Password validations -->
+  <!-- {{ form.confirm_password.label(class='label') }} -->
+  {% if form.confirm_password.errors %} {{
+  form.confirm_password(class="form-control p-3 mt-4 lead", required=False,
+  placeholder='Confirm Password') }} {% for error in
+  form.confirm_password.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.confirm_password(class="form-control p-3 mt-4
+  lead", required=False, placeholder='Confirm Password') }} {% endif %}
+
+  <!-- For submit button -->
+  {{ form.submit(size=20, class='btn btn-success mt-4 w-100 p-2')}}
+
+  <p style="color: black; margin-top: 1rem" class="text-muted">
+    Already have an account?
+    <a
+      class="text-muted"
+      style="text-decoration: none; font-weight: 500"
+      href="{{ url_for('login') }}"
+      >Login</a
+    >
+  </p>
+</form>
+
+{% endblock content %}

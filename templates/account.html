@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/account.css') }}"
+/>
+<script
+  type="text/javascript"
+  src="{{ url_for('static', filename='javascript/jquery-3.6.1.min.js') }}"
+></script>
+<script
+  src="{{ url_for('static', filename='javascript/account.js') }}"
+  defer
+></script>
+{% endblock head %} 
+{% block title %}{{ user.username.title() }}'s account{% endblock title %}
+{% block content %}
+
+<div class="w-100">
+  <form action="" method="post">
+    <h1 class="text-muted">
+      {{ user.first_name.upper() }} {{ user.last_name.upper() }}
+    </h1>
+    {{ form.hidden_tag() }}
+
+    <!-- For title field -->
+    {% if form.title.errors %} {{ form.title(class="form-control p-3 mt-4",
+    required=False, placeholder="Enter title") }} {% for error in
+    form.title.errors %}
+    <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+    {% endfor %} {% else %} {{ form.title(class="form-control p-3 mt-4",
+    required=False, placeholder="Enter title") }} {% endif %}
+
+    <!-- For post field-->
+    {% if form.post_content.errors %} {{ form.post_content(class="form-control
+    p-3 mt-4 lead", required=False, placeholder='Enter post') }} {% for error in
+    form.post_content.errors %}
+    <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
+    {% endfor %} {% else %} {{ form.post_content(class="form-control p-3 mt-4
+    lead", required=False, placeholder='Enter post') }} {% endif %}
+
+    <!-- For submit button -->
+    {{ form.submit(size=20, class='btn btn-success mt-4 w-100 p-2')}}
+  </form>
+
+  <hr class="mt-5" />
+  {% if user %} {% for each in user.posts[::-1] %}
+  <div
+    class="card p-4 mt-4"
+    style="
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      border-left: 5px solid yellowgreen;
+    "
+  >
+    <div class="d-flex align-items-center">
+      <img
+        style="width: 4rem"
+        src="{{ url_for('static', filename='images/user.png') }}"
+        alt=""
+      />
+      <div class="mx-3 d-flex flex-column">
+        <span class="h5 text-info"
+          >{{ user.first_name.upper() }} {{ user.last_name.upper() }}
+        </span>
+        <small class="text-muted fw-normal"
+          >{{ each.date_posted.strftime('%Y-%m-%d') }}</small
+        >
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <a
+        href="{{ url_for('display_post', blog_id=each.id) }}"
+        class="h5 text-decoration-none text-dark d-flex align-items-center card-title mt-4"
+        style="width: fit-content"
+      >
+        {{ each.title.title() }}<i
+          class="fa fas fas fas fa-external-link-alt d-xl-block d-lg-block d-none p-2 text-secondary mt-2 h6"
+          style="opacity: 0.8; font-size: small"
+        ></i>
+      </a>
+      <div class="d-flex align-items-center flex-row-reverse part">
+        <i class="fa fas fa-ellipsis-h h3 toggler" style="cursor: pointer"></i>
+        <div class="card p-3 mx-3 hide">
+          <form
+            action="{{ url_for('delete_post', post_id=each.id) }}"
+            method="post"
+            class="d-flex align-items-center text-danger justify-content-around"
+          >
+            <input
+              type="submit"
+              value="Delete"
+              onclick="return confirm('Are you sure yo want to delete this post')"
+              style="background: none; border: none"
+              class="text-danger"
+            /><i class="fa fas fa-trash-alt"></i>
+          </form>
+          <hr style="border: 1px solid white" />
+          <a
+            href="{{ url_for('update_post', post_id=each.id) }}"
+            class="d-flex align-items-center text-danger justify-content-around text-decoration-none fw-normal text-light"
+            >Update &nbsp; <i class="fa fa-pen-square text-light"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <p class="card-text">{{ each.content }}</p>
+  </div>
+  {% endfor %} {% endif %}
+</div>
+{% endblock content %} {% block script %} {% endblock script %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %} 
+{% block title %}About us{% endblock title %}
+{% block content %}
+<div
+  class="w-100 p-5"
+  style="
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    /* background: url(../static/images/Phone\ PNG.png); */
+    background-size: 10rem;
+    background-repeat: no-repeat;
+    background-position: -1rem bottom;
+    border-top: 3px solid darksalmon;
+  "
+>
+
+  <div class="d-flex flex-column p-3 w-100">
+    <h1 class="text-muted">About Us</h1>
+    <hr
+    class=""
+    style="
+    border: 1px solid rgb(149, 146, 146);
+    "
+    >
+    <p class="text-muted text-decoration-underline p-y">THE BLOG</p>
+    <p class="text-muted">
+      This project is a blog website where a user gets to create an account,
+      login and create an interesting blog post for other users to see and read
+    </p>
+    <p>
+
+    </p>
+  </div>
+  <img src="{{ url_for('static', filename='images/screen.png') }}" alt="screenshot" class="w-100">
+  <div class="d-flex flex-column p-3 w-100">
+    <p class="h4 text-danger"
+    >This project was built with:</p>
+    <hr>
+    <p>
+        <i class="fa fab fa-html5 h3 text-muted p-1"></i>
+        <i class="fa fab fa-css3-alt h3 text-muted p-1"></i>
+        <i class="fab fab fa-bootstrap h3 text-muted p-1"></i>
+        <i class="fab fab fa-js-square h3 text-muted p-1"></i>
+        <i class="fab fab fa-python h3 text-muted p-1"></i>
+            <br>
+        <span class="h5 text-muted">Using the with Flask framework</span>
+    </p>
+  </div>
+  
+  <div class="p-3">
+    <p class="text-decoration-underline text-muted ">THE DEVELOPER</p>
+  <img src="{{ url_for('static', filename='images/mine.jpg') }}" alt="my Avatar" class="w-50 mb-3"> <br>
+  <span class="text-muted"><span class="text-danger">Name</span> : Adeniyi Olanrewaju</span> <br>
+  <span class="text-muted"><span class="text-danger">Specialization</span> : Software Development</span> <br>
+  <hr>
+  <span class="text-muted">A student of <a href="https://altschoolafrica.com/schools/engineering" 
+    class="text-decoration-none fw-bold text-primary">Altschoo Africa</a>, currently learning python and flask framework having learnt html, css, javascript and bootsrap.</span> <br><br>
+  <span class="text-muted">
+    <a href="{{ url_for('contact') }}" class="text-primary fw-bold">CONTACT ME</a>
+  </span> <br>
+  <span class="text-muted"></span><br>
+  </div>
+  <p class="text-muted small mt-2">&copy; <span>{{ date.strftime('%Y-%m-%d') }}</span></p>
+</div>
+{% endblock content %}

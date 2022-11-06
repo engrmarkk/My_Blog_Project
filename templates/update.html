@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block head %} {% endblock head %} {% block content
+%}
+
+<div class="w-100">
+  <form action="" method="post">
+    <h1 class="text-muted">Update Post</h1>
+    {{ form.hidden_tag() }}
+
+    <!-- For title field -->
+    {% if form.title.errors %} {{ form.title(class="form-control p-3 mt-4",
+    required=False, placeholder="Enter title") }} {% for error in
+    form.title.errors %}
+    <small class="text-danger">{{ error }}</small>
+    {% endfor %} {% else %} {{ form.title(class="form-control p-3 mt-4",
+    required=False, placeholder="Enter title") }} {% endif %}
+
+    <!-- For post field-->
+    {% if form.post_content.errors %} {{ form.post_content(class="form-control
+    p-3 mt-4 lead", required=False, placeholder='Enter post') }} {% for error in
+    form.post_content.errors %}
+    <small class="text-danger">{{ error }}</small>
+    {% endfor %} {% else %} {{ form.post_content(class="form-control p-3 mt-4
+    lead", required=False, placeholder='Enter post') }} {% endif %}
+
+    <!-- For submit button -->
+    {{ form.submit(size=20, class='btn btn-success mt-4 w-100 p-2')}}
+  </form>
+</div>
+{% endblock content %}

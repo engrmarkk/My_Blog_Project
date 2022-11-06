@@ -1,0 +1,55 @@
+{% extends 'base.html' %} 
+{% block title %}Login Page{% endblock title %}
+{% block content %}
+
+<form
+  action=""
+  method="post"
+  class="w-100 p-5"
+  style="
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-top: 3px solid lightgreen;
+  "
+>
+  <h1 class="text-muted">Login</h1>
+  {{ form.hidden_tag() }}
+
+  
+  <!-- For Emails validations -->
+  <!-- {{ form.email.label(class='label') }} -->
+  {% if form.email.errors %} {{ form.email(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter email") }} {% for error in
+  form.email.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.email(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter email") }} {% endif %}
+  <!-- For password validations -->
+  <!-- {{ form.password.label(class='label') }} -->
+  {% if form.password.errors %} {{ form.password(class="form-control p-3 mt-4
+  lead", required=False, placeholder='Enter password') }} {% for error in
+  form.password.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.password(class="form-control p-3 mt-4 lead",
+  required=False, placeholder='Enter password') }} {% endif %}
+
+  <!-- Rmember -->
+  <div class="d-flex align-items-center mt-4">
+    {{ form.remember(class="", required=False) }} {{
+    form.remember.label(class='mx-1 text-muted') }}
+  </div>
+
+  <!-- For submit button -->
+  {{ form.submit(size=20, class='btn btn-success mt-4 w-100 p-2')}}
+
+  <p style="color: black; margin-top: 1rem" class="text-muted">
+    Don't have an account?
+    <a
+      class="text-muted"
+      style="text-decoration: none; font-weight: 500"
+      href="{{ url_for('register') }}"
+      >Register</a
+    >
+  </p>
+</form>
+
+{% endblock content %}

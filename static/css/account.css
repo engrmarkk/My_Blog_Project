@@ -1,0 +1,14 @@
+div.hide{
+    transition: .6s;
+    display: none;
+}
+
+div.hide.active{
+    transition: .6s;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.818);
+    font-weight: bold;
+}
