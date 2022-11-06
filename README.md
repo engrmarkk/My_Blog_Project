@@ -4,6 +4,10 @@
 
 <a name="readme-top"></a>
 
+
+https://user-images.githubusercontent.com/100721103/200149633-373db975-c47f-43a7-9288-f6cbd16e0410.mp4
+
+
 <!-- Project Shields -->
 <div align="center">
 
@@ -15,14 +19,6 @@
 
 </div>
 
-<!-- Project Logo -->
-<br />
-<div align="center">
-    <video width="320" height="240" autoplay>
-  <source src="./static/videos/videoo.mp4" type="video/mp4">
-</video>
-</div>
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <br />
 
 <div>
@@ -30,7 +26,6 @@
     <a href="https://github.com/engrmarkk/My_Blog_Project#readme"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <a href="https://github.com/engrmarkk/My_Blog_Project/blob/main/static/screen-light.png">View Demo</a>  
     ·
     <a href="https://github.com/engrmarkk/My_Blog_Project/issues">Report Bug</a>
