@@ -1,9 +1,12 @@
-{% extends 'base.html' %} 
+<!-- Extends from the base.html file -->
+{% extends 'base.html' %}
+<!-- The block for the title of this file -->
 {% block title %} Home {% endblock title %}
 {% block content %}
 
 <!-- if a user is active -->
 {% if current_user.is_authenticated %}
+<!-- The scrolling text displays the user's first name -->
 <marquee behavior="smooth" direction="" class="move"
   >Hi! {{current_user.first_name.title()}}</marquee
 >
@@ -14,7 +17,10 @@ style="
 border: 1px solid rgb(147, 139, 139);
 "
 />
-{% if posts %} {% for post in posts %}
+<!-- If the  -->
+{% if posts %} 
+
+{% for post in posts %}
 <div
   class="card p-4 mt-4"
   style="

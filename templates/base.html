@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- The bootstrap libraries -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -19,12 +20,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    <!-- The Jquery local libarary -->
     <script
       type="text/javascript"
       src="{{ url_for('static', filename='javascript/jquery-3.6.1.min.js') }}"
     ></script>
 
-    <!-- ......................... -->
+    <!-- ............Linked Javascript File............. -->
 
     <script
       type="text/javascript"
@@ -34,11 +36,14 @@
 
     <!-- ............................................ -->
 
+    <!-- Block to be inherited from this file by other files if need be -->
     {% block head %}{% endblock head %}
+    <!-- Css link -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <!-- Title , the block to be inherited by other files so as to add a title for each page-->
     <title>Blog -
       {% block title %}{% endblock title %}
     </title>
@@ -46,11 +51,14 @@
   </head>
 
   <body>
+    <!-- There is a button at the bottom that redirects to this
+    whenever the button is being clicked, it bring the user back to the top of the page
+    -->
     <a name="top"></a>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
       <div class="container">
-        <!-- <a href="#" class="navbar-brand">myBlog</a> -->
+        <!-- The navbar brand -->
         <a href="{{ url_for('home') }}"
         class="navbar-brand"
           ><img
@@ -58,7 +66,7 @@
             alt=""
             style="width: 5rem"
         /></a>
-
+        <!-- Bootstrap nav toggler -->
         <button
           class="navbar-toggler"
           type="button"
@@ -70,9 +78,10 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
+        <!-- The nav links -->
         <div class="collapse navbar-collapse" id="navmenu">
           {% if current_user.is_authenticated %}
+          <!-- If the user is logged in, this nav links appears -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <a href="{{ url_for('home') }}" class="nav-link">Home</a>
@@ -101,6 +110,7 @@
           </ul>
 
           {% else %}
+          <!-- If the user is not logged in, this nav links appears -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <a href="{{ url_for('home') }}" class="nav-link">Home</a>
@@ -123,9 +133,11 @@
       </div>
     </nav>
 
+    <!-- The body section -->
     <section class="container my-5 d-flex px-4 px-lg-5">
       <!-- web content -->
       <div class="w-100 this" id="thiss">
+        <!-- Flash messages -->
         {% with messages = get_flashed_messages(with_categories=true) %} {% if
         messages %} {% for category, message in messages %}
         <div
@@ -165,28 +177,41 @@
         <div class="card-body">
           <h5 class="card-title text-muted">LATEST BLOGS</h5>
         </div>
+        <!-- If the user is logged in -->
         {% if current_user.is_authenticated %}
         <ul class="list-group list-group-flush">
+          <!-- Check if the user has a recent post -->
           {% if current_user.posts[-1] %}
           <li class="list-group-item">
+            <!-- If yes, the title of the post stays at the top in the side menu recent blog list -->
             {{ current_user.posts[-1].title.title() }}
           </li>
+          <!-- If no, This should occupy the space -->
           {% else %}
           <li class="list-group-item">Unavailable</li>
-          {% endif %} {% if current_user.posts[-2] %}
+          {% endif %} 
+          <!-- Check if the user had a post before the recent post -->
+          {% if current_user.posts[-2] %}
           <li class="list-group-item">
+            <!-- If yes, the title of the post occupies the second side menu recent blog list -->
             {{ current_user.posts[-2].title.title() }}
           </li>
+          <!-- If no, This should occupy the space -->
           {% else %}
           <li class="list-group-item">Unavailable</li>
-          {% endif %} {% if current_user.posts[-3] %}
+          {% endif %} 
+          <!-- Check if the user had a second post before the recent post -->
+          {% if current_user.posts[-3] %}
           <li class="list-group-item">
+            <!-- If yes, the title of the post occupies the third side menu recent blog list -->
             {{ current_user.posts[-3].title.title() }}
           </li>
+          <!-- If no, This should occupy the space -->
           {% else %}
           <li class="list-group-item">Unavailable</li>
           {% endif %}
         </ul>
+        <!-- If a user is not logged in...display this in the recent blog list -->
         {% else %}
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Recent Blog 1</li>
@@ -196,17 +221,19 @@
         {% endif %}
       </div>
     </section>
-
+    <!-- Icon for the dark mode -->
     <i class="dntoggle fas fa-moon"></i>
+
+    <!-- Icon tha redirects back to the top of the page -->
     <a href="#top" class="up"><i class="fa fas fa-arrow-alt-circle-up"></i></a>
 
     <!-- FOOTer -->
     <footer class="fixed-bottom text-center bg-dark text-light py-1 small"
     style="z-index: 0;"
     >
-      &copy;
     </footer>
 
+    <!-- Javascript code to get the current year and add it to the footer -->
     <script>
       const paragraph = `<span class='small'>Copyright &copy; ${new Date().getFullYear()} | Adeniyi Olanrewaju</span>`;
       document.querySelector('footer').innerHTML=paragraph;
@@ -214,12 +241,6 @@
 
     <!-- @@@@@@@@@@@@@@@@@@@@@@@ -->
 
-    <!-- Bootstrap script -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
     <!-- Bootsrap popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
