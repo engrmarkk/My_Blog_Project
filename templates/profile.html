@@ -7,7 +7,7 @@ background: none;
 "
 onclick="history.back()"
 ><i class="fa fas fa-backspace text-muted h4"></i>&nbsp; Go back</button>
-<div class="w-100">
+<div class="" id="profile">
   <div
     class="d-flex align-items-start px-5 flex-column"
     style="
@@ -19,17 +19,38 @@ onclick="history.back()"
       border-left: 5px solid yellowgreen;
     "
   >
-    <img
-      src="{{ url_for('static', filename='images/user.png') }}"
-      class="w-25 my-5"
-      alt=""
-    />
+  <div class="d-flex align-items-end">
+    {% if user.photo == 'user.png' %}
+    <img class="rounded-circle article-img my-5 w-50"
+        src="{{ url_for('static', filename='images/profile/' + user.photo) }}">
+      {% else %}
+      <img class="rounded img-thumbnail article-img my-5"
+        src="{{ url_for('static', filename='images/profile/' + user.photo) }}">
+      {% endif %}
+    {% if current_user.id == user.id %}
+    <a href="{{ url_for('view.add_photo') }}" 
+    class="text-decoration-none"><i class="fa fa-camera h4"></i></a>
+  {% endif  %}
+    </div>
+
     <div class="d-flex flex-column m-1 mb-5">
+      {% if current_user.id != user.id %}
       <p class="bg-success px-2 text-light" style="width: fit-content">Hello</p>
-      <p class="text-muted h4 fw-bold">
+      {% endif %}
+      <p class="text-muted h5 fw-bold">
         <span class="text-muted p fw-normal">I'm</span> {{
-        user.last_name.title() }} {{ user.first_name.title() }} <br />
-        <small class="h6 fw-normal text-muted">An Experienced Blogger</small>
+        user.last_name.title() }} {{ user.first_name.title() }} &nbsp; 
+        {% if current_user.is_authenticated %}        
+        {% if current_user.id != user.id %}
+        <!-- Button trigger modal -->
+<button type="button" class="border-0 text-primary fa fa-message" 
+data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: none;">
+</button>
+{% endif %}
+{% endif %}
+<br>
+        
+        <small class="h6 fw-normal fs-6 text-muted">An Experienced Blogger</small>
       </p>
       <hr class="" style="border: 1px solid rgb(147, 139, 139)" />
       <p class=" text-light rounded-pill d-flex align-items-center justify-content-start">
@@ -49,6 +70,72 @@ onclick="history.back()"
         <i class="fa fas fa-sticky-note rounded-pill bg-success p-2 small"></i> <span class="fw-normal text-muted fw-bold">&nbsp;&nbsp; {{ num }} Post</span>
       </p>
       {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% for dm in dms %}
+        {% if current_user.id == dm.user_1 or current_user.id == dm.user %}
+        {% if user.id == dm.user or user.id == dm.user_1 %}
+        {% if dm.dm_type == 'send' and dm.user_1 == current_user.id%}
+       
+        <div class="d-flex align-items-start flex-row-reverse">
+        <img class="rounded-circle article-img"
+        style="width: 1.3rem;
+        margin-left: .4rem;
+        "
+          src="{{ url_for('static', filename='images/profile/' + current_user.photo) }}">
+        <p class="card p-2 bg-success text-white" style="width: fit-content; max-width: 50%;">
+          {{ dm.dm_message }}
+          <small style="font-size: .5rem; margin-top: .5rem;">{{ dm.date_sent.strftime('%Y-%m-%d') }}</small>
+        </p>
+
+        <div class="px-2">
+          <a href="{{ url_for('view.delete_message', message_id=dm.id, profile_id=user.id) }}" 
+          onclick="return confirm('Are you sure yo want to delete this post')"
+          class="text-decoration-none text-danger "
+          style="font-size: .75rem;"
+          ><i class="fas fa-trash-alt"></i></a>
+        </div>
+
+        </div>
+
+        {% elif dm.dm_type == 'receive' and dm.user_1 == user.id %}
+  
+        <div class="d-flex align-items-start">
+        <p><img class="rounded-circle article-img"
+          style="width: 1.3rem;
+        margin-right: .4rem;
+        "
+          src="{{ url_for('static', filename='images/profile/' + user.photo) }}"></p>
+        <p class="card p-2 bg-secondary text-white" style="width: fit-content; max-width: 50%;">
+          {{ dm.dm_message }}
+          <small style="font-size: .5rem; margin-top: .5rem;">{{ dm.date_sent.strftime('%Y-%m-%d') }}</small>
+        </p>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      </div>
+      <!-- <div class="" style="border: 1px solid red;"> -->
+        <form action="" method="post" class="modal-footer w-100" id="post-form">
+          {{ form.hidden_tag() }}
+          {{ form.dm(class="form-control p-2 bg-white", required=False,
+          placeholder="Enter your message", id="messaged" ) }}
+          <button type="submit" class="btn btn-primary form-control">Send</button>
+        </form>
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+      <!-- </div> -->
     </div>
   </div>
 </div>

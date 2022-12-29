@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<button class="d-flex text-muted mb-4" style="border: none;
+background: none;
+" onclick="history.back()"><i class="fa fas fa-backspace text-muted h4"></i>&nbsp; Go back</button>
+
+<div class="m-auto d-flex justify-content-center">
+    {% if current_user.photo == 'user.png' %}
+    <img class="rounded-circle article-img my-5 w-50"
+        src="{{ url_for('static', filename='images/profile/' + current_user.photo) }}">
+      {% else %}
+      <img class="rounded-circle article-img my-5"
+        src="{{ url_for('static', filename='images/profile/' +current_user.photo) }}">
+      {% endif %}
+</div>
+
+<form action="" method="post" class="mb-5" enctype="multipart/form-data">
+    <!-- For image validations -->
+    <!-- {{ form.image.label(class='label') }} -->
+    {% if form.image.errors %} {{ form.image(class="form-control-file w-100 p-3 mt-5",
+    required=False, placeholder="Enter email") }} {% for error in
+    form.image.errors %}
+    <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
+    {% endfor %} {% else %} {{ form.image(class=" w-100 mt-5 form-control-file",
+    required=False, placeholder="Enter email") }} {% endif %}
+
+    <input type="submit" value="Upload" class="btn btn-success mt-2">
+
+</form>
+{% endblock content %}

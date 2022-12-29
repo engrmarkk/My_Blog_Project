@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
@@ -28,6 +29,7 @@ class UpdateForm(FlaskForm):
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(min=2, max=30)])
+    image = FileField(validators=[FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
     post_content = TextAreaField('Post Content', validators=[DataRequired()])
     submit = SubmitField('Post')
 
@@ -37,3 +39,15 @@ class ContactForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     message = TextAreaField('Message', validators=[DataRequired()])
     submit = SubmitField('Send')
+
+
+class DmForm(FlaskForm):
+    dm = StringField('Dm', validators=[DataRequired()])
+
+
+class PhotoForm(FlaskForm):
+    image = FileField(validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])
+
+
+class CommentForm(FlaskForm):
+    comment = TextAreaField('Comment', validators=[DataRequired()])

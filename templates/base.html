@@ -26,6 +26,10 @@
       src="{{ url_for('static', filename='javascript/jquery-3.6.1.min.js') }}"
     ></script>
 
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"  
+     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
+
     <!-- ............Linked Javascript File............. -->
 
     <script
@@ -59,7 +63,7 @@
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
       <div class="container">
         <!-- The navbar brand -->
-        <a href="{{ url_for('home') }}"
+        <a href="{{ url_for('view.home') }}"
         class="navbar-brand"
           ><img
             src="{{ url_for('static', filename='images/blloogg.png') }}"
@@ -84,48 +88,51 @@
           <!-- If the user is logged in, this nav links appears -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+              <a href="{{ url_for('view.home') }}" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
               <a
-                href="{{ url_for('profile', profile_id=current_user.id) }}"
+                href="{{ url_for('view.profile', profile_id=current_user.id) }}"
                 class="nav-link"
                 >Profile</a
               >
             </li>
 
             <li class="nav-item">
-              <a href="{{ url_for('account') }}" class="nav-link">Post</a>
+              <a href="{{ url_for('view.account') }}" class="nav-link">Post</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('about') }}" class="nav-link">About</a>
+              <a href="{{ url_for('view.about') }}" class="nav-link">About</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+              <a href="{{ url_for('view.contact') }}" class="nav-link">Contact</a>
             </li>
 
             <li class="nav-item">
-              <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+              <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
             </li>
+            {% block link %}
+
+            {% endblock link %}
           </ul>
 
           {% else %}
           <!-- If the user is not logged in, this nav links appears -->
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+              <a href="{{ url_for('view.home') }}" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('about') }}" class="nav-link">About</a>
+              <a href="{{ url_for('view.about') }}" class="nav-link">About</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+              <a href="{{ url_for('view.contact') }}" class="nav-link">Contact</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+              <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url_for('register') }}" class="nav-link">Register</a>
+              <a href="{{ url_for('auth.register') }}" class="nav-link">Register</a>
             </li>
           </ul>
           {% endif %}
@@ -133,8 +140,21 @@
       </div>
     </nav>
 
+{% block car %}
+{% endblock car %}
+
+
+
+
+<div class=" mt-5 px-4 px-lg-5">
+  {% block any %}
+{% endblock any %}
+</div>
+
+
+
     <!-- The body section -->
-    <section class="container my-5 d-flex px-4 px-lg-5">
+    <section class="  my-3 d-flex px-4 px-lg-5 mb-5">
       <!-- web content -->
       <div class="w-100 this" id="thiss">
         <!-- Flash messages -->
@@ -143,7 +163,7 @@
         <div
           class="alert-dismissible fade show mb-4 m-auto small alert alert-{{ category }}"
           role="alert"
-          style="height: 3.5rem; transition: 0.6s"
+          style="height: 3.5rem; transition: 0.6s; width: fit-content; padding-right: 6rem; padding-left: 6rem;"
         >
         {% if category=='success' %}
           <p class="small text-center"><i class="fa fas fas fa-check"></i>&nbsp;&nbsp;&nbsp;{{ message }}</p>
@@ -157,20 +177,23 @@
             aria-label="Close"
           ></button>
         </div>
-        {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock
-        content %}
+        {% endfor %} {% endif %} {% endwith %} {% block content %} 
+        {% endblock content %}
       </div>
 
       <!-- Side menu -->
+      <div class="d-xl-block d-lg-block d-none" style="width: 23rem;">
       <div
-        class="card bg-dark d-xl-block d-lg-block d-none"
-        style="width: 25rem; height: fit-content"
+        class="card bg-dark"
+        style=" height: fit-content;"
       >
         <div class="m-auto d-flex mt-3">
           <img
             src="{{ url_for('static', filename='images/owl.png') }}"
-            class="card-img-top w-50"
-            style="margin: auto"
+            class="card-img-top"
+            style="margin: auto;
+            width: 7rem;
+            "
             alt="..."
           />
         </div>
@@ -201,25 +224,19 @@
           <li class="list-group-item">Unavailable</li>
           {% endif %} 
           <!-- Check if the user had a second post before the recent post -->
-          {% if current_user.posts[-3] %}
-          <li class="list-group-item">
-            <!-- If yes, the title of the post occupies the third side menu recent blog list -->
-            {{ current_user.posts[-3].title.title() }}
-          </li>
-          <!-- If no, This should occupy the space -->
-          {% else %}
-          <li class="list-group-item">Unavailable</li>
-          {% endif %}
         </ul>
         <!-- If a user is not logged in...display this in the recent blog list -->
         {% else %}
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Recent Blog 1</li>
           <li class="list-group-item">Recent Blog 2</li>
-          <li class="list-group-item">Recent Blog 3</li>
         </ul>
         {% endif %}
-      </div>
+        
+      </div><br>
+      <div id="MyClockDisplay" class="clock text-muted fa fa-clock p-3 w-100 fw-bold" 
+          style="letter-spacing: 3px;" onload="showTime()"></div>
+    </div>
     </section>
     <!-- Icon for the dark mode -->
     <i class="dntoggle fas fa-moon"></i>

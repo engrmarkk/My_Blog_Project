@@ -1,127 +1,114 @@
 {% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/account.css') }}"
-/>
-<script
-  type="text/javascript"
-  src="{{ url_for('static', filename='javascript/jquery-3.6.1.min.js') }}"
-></script>
-<script
-  src="{{ url_for('static', filename='javascript/account.js') }}"
-  defer
-></script>
-{% endblock head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}" />
+<script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.6.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='javascript/account.js') }}" defer></script>
+{% endblock head %}
 {% block title %}{{ post.author.username.title() }}'s post{% endblock title %}
-{% block content %} 
+{% block content %}
 
-<button class="d-flex text-muted mb-4"
-style="border: none;
+<button class="d-flex text-muted mb-4" style="border: none;
 background: none;
-"
-onclick="history.back()"
-><i class="fa fas fa-backspace text-muted h4"></i>&nbsp; Go back</button>
-{% if post.user_id == user.id %}
+" onclick="history.back()"><i class="fa fas fa-backspace text-muted h4"></i>&nbsp; Go back</button>
 <!-- if the user is active -->
-<div
-  class="card p-4"
-  style="
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    border-top: 5px solid yellowgreen;
-  "
->
+<div class="card p-4 mb-5" style="
+    box-shadow: rgba(70, 68, 68, 0.1) 0px 4px 12px;
+  ">
   <div class="d-flex align-items-center">
-    <img
-      style="width: 4rem"
-      src="{{ url_for('static', filename='images/user.png') }}"
-      alt=""
-    />
+    {% if post.author.photo %}
+      <img class="rounded-circle article-img"
+      style="width: 5rem;"
+      src="{{ url_for('static', filename='images/profile/' + post.author.photo) }}">
+      {% else %}
+      <img
+        style="width: 4rem"
+        src="{{ url_for('static', filename='images/user.png') }}"
+        alt=""
+      />
+      {% endif %}
     <div class="mx-3 d-flex flex-column">
-      <a
-        href="{{ url_for('profile', profile_id=post.author.id) }}"
-        class="text-decoration-none text-secondary"
-      >
-        <span class="h5 text-info"
-          >{{ post.author.first_name.upper() }} {{ post.author.last_name.upper()
+      <a href="{{ url_for('view.profile', profile_id=post.author.id) }}" class="text-decoration-none text-secondary">
+        <span class="h5 text-info">{{ post.author.first_name.upper() }} {{ post.author.last_name.upper()
           }}
         </span>
       </a>
-      <small class="text-muted fw-normal"
-        >{{ post.date_posted.strftime('%Y-%m-%d') }}</small
-      >
+      <small class="text-muted fw-normal">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
     </div>
   </div>
   <div class="d-flex align-items-center justify-content-between">
-    <p
-      class="h4 text-decoration-none text-dark card-title mt-4"
-      style="width: fit-content"
-    >
+    <p class="h4 text-decoration-none text-dark card-title mt-4" style="width: fit-content">
       {{ post.title.title() }}
     </p>
+{% if post.user_id == user.id %}
     <div class="d-flex align-items-center flex-row-reverse part">
       <i class="fa fas fa-ellipsis-h h3 toggler" style="cursor: pointer"></i>
       <div class="card p-3 mx-3 hide">
-        <form
-          action="{{ url_for('delete_post', post_id=post.id) }}"
-          method="post"
-          class="d-flex align-items-center text-danger justify-content-around"
-        >
-          <input
-            type="submit"
-            value="Delete"
-            onclick="return confirm('Are you sure yo want to delete this post')"
-            style="background: none; border: none"
-            class="text-danger"
-          /><i class="fa fas fa-trash-alt"></i>
+        <form action="{{ url_for('view.delete_post', post_id=post.id) }}" method="post"
+          class="d-flex align-items-center text-danger justify-content-around">
+          <input type="submit" value="Delete" onclick="return confirm('Are you sure yo want to delete this post')"
+            style="background: none; border: none" class="text-danger" /><i class="fa fas fa-trash-alt"></i>
         </form>
         <hr style="border: 1px solid white" />
-        <a
-          href="{{ url_for('update_post', post_id=post.id) }}"
-          class="d-flex align-items-center text-danger justify-content-around text-decoration-none fw-normal text-light"
-          >Update &nbsp; <i class="fa fa-pen-square text-light"></i
-        ></a>
+        <a href="{{ url_for('view.update_post', post_id=post.id) }}"
+          class="d-flex align-items-center text-danger justify-content-around text-decoration-none fw-normal text-light">Update
+          &nbsp; <i class="fa fa-pen-square text-light"></i></a>
       </div>
     </div>
+    {% endif %}
   </div>
+
+  {% if post.photo %}
+  <div class="mt-4">
+    <img class=" article-img img-thumbnail"
+    src="{{ url_for('static', filename='images/post/' + post.photo) }}">
+  </div>
+  {% endif %}
+
   <hr />
   <p class="card-text">{{ post.content }}</p>
+
+
+<hr>
+<small>Comment section</small>
+<hr class="mb-3">
+<div>
+  {% for each_comment in post.comment[::-1] %}
+  <div class=" p-2 d-flex align-items-start">
+    <a href="{{ url_for('view.profile', profile_id=each_comment.who.id) }}">
+      <img src="{{ url_for('static', filename='images/profile/' + each_comment.who.photo) }}"
+      class="rounded-circle"
+      style="width: 2rem;"
+      alt="">
+    </a>
+    <div class="d-flex flex-column">
+      <span class="bg-secondary rounded p-2 mx-2 text-white">
+        {{ each_comment.comment }}
+      <br>
+      <small class="d-flex justify-content-end text-light mt-1" style="font-size: .65rem;">
+        {{ each_comment.comment_date.strftime('%Y-%h-%d') }}</small>
+    </span>
+  </div>
+  {% if each_comment.commenter == current_user.id %}
+  <div>
+    <a href="{{ url_for('view.delete_comment', comment_id=each_comment.id, blog_id=post.id) }}" 
+    onclick="return confirm('Are you sure yo want to delete this comment')"
+    class="text-decoration-none text-danger "
+    style="font-size: .75rem;"
+    ><i class="fas fa-trash-alt"></i></a>
+  </div>
+  {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% if current_user.is_authenticated %}
+  <!-- comment section -->
+  <form action="" method="post" class="w-100 mt-2">
+    {{ form.hidden_tag() }}
+    {{ form.comment(class="form-control p-2 bg-white", required=False,
+    placeholder="Write your comment here", id="messaged" ) }}
+    <button type="submit" class="btn btn-primary form-control mt-2">Send</button>
+  </form>
+  {% endif %}
 </div>
 
-{% else %}
-<!-- if the user is not active -->
 
-<div class="card p-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px">
-  <div class="d-flex align-items-center">
-    <img
-      style="width: 4rem"
-      src="{{ url_for('static', filename='images/user.png') }}"
-      alt=""
-    />
-    <div class="mx-3 d-flex flex-column">
-      <a
-        href="{{ url_for('profile', profile_id=post.author.id) }}"
-        class="text-decoration-none text-secondary"
-      >
-        <span class="h5 text-info"
-          >{{ post.author.first_name.upper() }} {{ post.author.last_name.upper()
-          }}
-        </span>
-      </a>
-      <small class="text-muted fw-normal"
-        >{{ post.date_posted.strftime('%Y-%m-%d') }}</small
-      >
-    </div>
-  </div>
-  <div class="d-flex align-items-center justify-content-between">
-    <p
-      class="h4 text-decoration-none text-dark card-title mt-4"
-      style="width: fit-content"
-    >
-      {{ post.title.title() }}
-    </p>
-  </div>
-  <hr />
-  <p class="card-text">{{ post.content }}</p>
-</div>
-
-{% endif %} {% endblock content %}
+{% endblock content %}

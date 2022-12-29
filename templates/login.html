@@ -5,13 +5,14 @@
 <form
   action=""
   method="post"
-  class="w-100 p-5"
+  class=" p-5 mb-5"
   style="
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    border-top: 3px solid lightgreen;
-  "
+    border-top: 7px solid lightgreen;
+  margin: auto;
+    "
 >
-  <h1 class="text-muted">Login</h1>
+  <h3 class="text-muted">Login</h3>
   {{ form.hidden_tag() }}
 
   
@@ -41,13 +42,22 @@
   <!-- For submit button -->
   {{ form.submit(size=20, class='btn btn-success mt-4 w-100 p-2')}}
 
-  <p style="color: black; margin-top: 1rem" class="text-muted">
+  <!-- <p style="color: black; margin-top: 1rem" class="text-muted">
     Don't have an account?
     <a
       class="text-muted"
       style="text-decoration: none; font-weight: 500"
-      href="{{ url_for('register') }}"
+      href="{{ url_for('auth.register') }}"
       >Register</a
+    >
+  </p> -->
+  <p class="text-muted mt-3 small">
+    Forgot password?
+    <a
+      class="text-muted fw-bold"
+      style="text-decoration: none; font-weight: 500"
+      href="{{ url_for('auth.register') }}"
+      >Reset</a
     >
   </p>
 </form>

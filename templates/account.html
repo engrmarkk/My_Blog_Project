@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block head %}
+{% extends 'base.html' %} 
+{% block head %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/account.css') }}"
@@ -16,10 +17,10 @@
 {% block content %}
 
 <div class="w-100">
-  <form action="" method="post">
-    <h1 class="text-muted">
+  <form action="" method="post" enctype="multipart/form-data" class="">
+    <h3 class="text-muted">
       {{ user.first_name.upper() }} {{ user.last_name.upper() }}
-    </h1>
+    </h3>
     {{ form.hidden_tag() }}
 
     <!-- For title field -->
@@ -29,6 +30,16 @@
     <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle small"></i>&nbsp;&nbsp;{{ error }}</small>
     {% endfor %} {% else %} {{ form.title(class="form-control p-3 mt-4",
     required=False, placeholder="Enter title") }} {% endif %}
+
+
+    <!-- For image validations -->
+    <!-- {{ form.image.label(class='label') }} -->
+    {% if form.image.errors %} {{ form.image(class="form-control p-3 mt-4",
+    required=False, placeholder="Enter email") }} {% for error in
+    form.image.errors %}
+    <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
+    {% endfor %} {% else %} {{ form.image(class=" p-3 mt-4 form-control",
+    required=False, placeholder="Enter email") }} {% endif %}
 
     <!-- For post field-->
     {% if form.post_content.errors %} {{ form.post_content(class="form-control
@@ -41,22 +52,26 @@
     <!-- For submit button -->
     {{ form.submit(size=20, class='btn btn-success mt-4 w-100 p-2')}}
   </form>
-
   <hr class="mt-5" />
+  
   {% if user %} {% for each in user.posts[::-1] %}
   <div
-    class="card p-4 mt-4"
-    style="
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-      border-left: 5px solid yellowgreen;
-    "
+    class="card p-4 mt-4 m-auto mb-4"
+    id="acct"
+    
   >
     <div class="d-flex align-items-center">
+      {% if current_user.photo %}
+      <img class="rounded-circle article-img"
+      style="width: 5rem;"
+      src="{{ url_for('static', filename='images/profile/' + current_user.photo) }}">
+      {% else %}
       <img
         style="width: 4rem"
         src="{{ url_for('static', filename='images/user.png') }}"
         alt=""
       />
+      {% endif %}
       <div class="mx-3 d-flex flex-column">
         <span class="h5 text-info"
           >{{ user.first_name.upper() }} {{ user.last_name.upper() }}
@@ -66,9 +81,10 @@
         >
       </div>
     </div>
+   
     <div class="d-flex align-items-center justify-content-between">
       <a
-        href="{{ url_for('display_post', blog_id=each.id) }}"
+        href="{{ url_for('view.display_post', blog_id=each.id) }}"
         class="h5 text-decoration-none text-dark d-flex align-items-center card-title mt-4"
         style="width: fit-content"
       >
@@ -81,7 +97,7 @@
         <i class="fa fas fa-ellipsis-h h3 toggler" style="cursor: pointer"></i>
         <div class="card p-3 mx-3 hide">
           <form
-            action="{{ url_for('delete_post', post_id=each.id) }}"
+            action="{{ url_for('view.delete_post', post_id=each.id) }}"
             method="post"
             class="d-flex align-items-center text-danger justify-content-around"
           >
@@ -95,15 +111,23 @@
           </form>
           <hr style="border: 1px solid white" />
           <a
-            href="{{ url_for('update_post', post_id=each.id) }}"
+            href="{{ url_for('view.update_post', post_id=each.id) }}"
             class="d-flex align-items-center text-danger justify-content-around text-decoration-none fw-normal text-light"
             >Update &nbsp; <i class="fa fa-pen-square text-light"></i
           ></a>
         </div>
       </div>
     </div>
+
+    {% if each.photo %}
+    <div class="mt-4">
+      <img class=" article-img img-thumbnail"
+      src="{{ url_for('static', filename='images/post/' + each.photo) }}">
+    </div>
+    {% endif %}
+
     <hr />
-    <p class="card-text">{{ each.content }}</p>
+    <p class="card-text text-muted" style="font-size: .9rem;">{{ each.content }}</p>
   </div>
   {% endfor %} {% endif %}
 </div>

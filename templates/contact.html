@@ -4,7 +4,7 @@ block content %}
 <form
   action=""
   method="post"
-  class="w-100 p-5"
+  class="p-5"
   style="
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     background: url(../static/images/Phone\ PNG.png);
@@ -12,20 +12,21 @@ block content %}
     background-repeat: no-repeat;
     background-position: -1rem bottom;
     border-top: 3px solid darksalmon;
+  margin: auto;
   "
 >
-  <h1 class="text-muted">Contact</h1>
-  {{ form.hidden_tag() }} {% if user.is_authenticated %}
+  <h3 class="text-muted">Contact</h3>
+  {{ form.hidden_tag() }} {% if current_user.is_authenticated %}
 
   <!-- For Full name validations -->
 
   {{ form.fullname(class="form-control p-3 mt-4 bg-white", required=False,
-  placeholder="Enter Full Name", value=user.last_name.title() + ' ' +
-  user.first_name.title() , **{ 'disabled':'true' } ) }}
+  placeholder="Enter Full Name", value=current_user.last_name.title() + ' ' +
+  current_user.first_name.title() ) }}
 
   <!-- For Emails validations -->
   {{ form.email(class="form-control p-3 mt-4 bg-white", required=False,
-  placeholder="Enter email",value=user.email , **{ 'disabled':'true' }) }} {%
+  placeholder="Enter email",value=current_user.email) }} {%
   else %}
 
   <!-- For Full name validations -->
@@ -55,25 +56,25 @@ block content %}
   <!-- For submit button -->
   {{ form.submit(size=20, class='btn btn-success mt-4 w-100 p-2')}}
 
-  <p class="mt-4 text-center lead text-muted">Contact us</p>
+  <p class="mt-4 text-center text-muted">Contact us</p>
   <div class="d-flex align-items-center justify-content-center">
     <a
       href="https://github.com/engrmarkk"
-      class="h4 text-white bg-dark p-2 mx-3 rounded social"
+      class="h4 text-white mx-3 social"
       target="_blank"
-      ><i class="fa fab fa-github"></i
+      ><i class="fa fab fa-github h5 text-muted"></i
     ></a>
     <a
       href="https://twitter.com/iamengrmark"
-      class="h4 text-white mx-3 bg-primary p-2 rounded social"
+      class="h4 text-white mx-3 social"
       target="_blank"
-      ><i class="fa fab fa-twitter"></i
+      ><i class="fa fab fa-twitter text-primary h5"></i
     ></a>
     <a
       href="mailto:atmme1992@gmail.com"
-      class="h4 text-white mx-3 p-2 bg-danger rounded social"
+      class="h4 text-white mx-3 social"
       target="_blank"
-      ><i class="fa fab fa-google-plus-g"></i
+      ><i class="fa fab fa-google-plus-g text-danger h5"></i
     ></a>
   </div>
 </form>
