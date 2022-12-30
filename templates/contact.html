@@ -33,7 +33,7 @@ block content %}
   {% if form.fullname.errors %} {{ form.fullname(class="form-control p-3 mt-4",
   required=False, placeholder="Enter Full Name") }} {% for error in
   form.fullname.errors %}
-  <small class="text-danger">{{ error }}</small>
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
   {% endfor %} {% else %} {{ form.fullname(class="form-control p-3 mt-4",
   required=False, placeholder="Enter Full Name") }} {% endif %}
 
@@ -41,7 +41,7 @@ block content %}
   {% if form.email.errors %} {{ form.email(class="form-control p-3 mt-4",
   required=False, placeholder="Enter email") }} {% for error in
   form.email.errors %}
-  <small class="text-danger">{{ error }}</small>
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
   {% endfor %} {% else %} {{ form.email(class="form-control p-3 mt-4",
   required=False, placeholder="Enter email") }} {% endif %} {% endif %}
 
@@ -49,7 +49,7 @@ block content %}
   {% if form.message.errors %} {{ form.message(class="form-control p-3 mt-4
   lead", required=False, placeholder='Enter message') }} {% for error in
   form.message.errors %}
-  <small class="text-danger">{{ error }}</small>
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
   {% endfor %} {% else %} {{ form.message(class="form-control p-3 mt-4 lead",
   required=False, placeholder='Enter message') }} {% endif %}
 

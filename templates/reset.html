@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% block title %}Reset Password Page{% endblock title %}
+{% block content %}
+
+<form
+  action=""
+  method="post"
+  class=" p-5 mb-5"
+  style="
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-top: 7px solid lightgreen;
+  margin: auto;
+    "
+>
+  <h3 class="text-muted">Reset Password </h3> 
+    <small class="small text-muted">
+        Please enter your registered email to get a reset token
+    </small>
+  {{ form.hidden_tag() }}
+
+   <!-- For Emails validations -->
+  <!-- {{ form.email.label(class='label') }} -->
+  {% if form.email.errors %} {{ form.email(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter email") }} {% for error in
+  form.email.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small><br>
+  {% endfor %} {% else %} {{ form.email(class="form-control p-3 mt-4",
+  required=False, placeholder="Enter email") }} {% endif %}
+
+  <input type="submit" value="Get token" class="btn btn-success mt-3">
+  </form>
+  {% endblock content %}

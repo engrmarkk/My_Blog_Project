@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% block title %}Reset Password Page{% endblock title %}
+{% block content %}
+
+<form
+  action=""
+  method="post"
+  class=" p-5 mb-5"
+  style="
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-top: 7px solid lightgreen;
+  margin: auto;
+    "
+>
+    <small class="h4 text-muted">
+        Please enter your reset token
+    </small>
+  {{ form.hidden_tag() }}
+
+   <!-- For Token validations -->
+  <!-- {{ form.newpassword.label(class='label') }} -->
+  {% if form.newpassword.errors %} {{ form.newpassword(class="form-control p-3 mt-4",
+  required=False, placeholder="New password") }} {% for error in
+  form.newpassword.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small>
+  {% endfor %} {% else %} {{ form.newpassword(class="form-control p-3 mt-4",
+  required=False, placeholder="New password") }} {% endif %}
+
+
+  <!-- For Token validations -->
+  <!-- {{ form.confirm_newpassword.label(class='label') }} -->
+  {% if form.confirm_newpassword.errors %} {{ form.confirm_newpassword(class="form-control p-3 mt-4",
+  required=False, placeholder="Confirm password") }} {% for error in
+  form.confirm_newpassword.errors %}
+  <small class="text-danger mt-1"><i class="fa fas fa-exclamation-circle"></i>&nbsp;&nbsp;{{ error }}</small><br>
+  {% endfor %} {% else %} {{ form.confirm_newpassword(class="form-control p-3 mt-4",
+  required=False, placeholder="Confirm password") }} {% endif %}
+  <input type="submit" value="Update Password" class="btn btn-success mt-3">
+  </form>
+  {% endblock content %}

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
@@ -51,3 +51,16 @@ class PhotoForm(FlaskForm):
 
 class CommentForm(FlaskForm):
     comment = TextAreaField('Comment', validators=[DataRequired()])
+
+
+class ResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+
+
+class SubmitToken(FlaskForm):
+    token = IntegerField('Token', validators=[DataRequired()])
+
+
+class UpdatePasswordForm(FlaskForm):
+    newpassword = PasswordField('Password', validators=[DataRequired()])
+    confirm_newpassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('newpassword')])
