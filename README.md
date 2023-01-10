@@ -181,6 +181,7 @@ Python3: [Get Python](https://www.python.org/downloads/)
 ## Update made
 
 <ul>
+  <li><b>Blueprint</b>: The Flask application has been restructured to utilize Flask Blueprints, allowing for a more organized and efficient development process. This restructuring provides users with a more intuitive and user-friendly experience, allowing them to quickly and easily create powerful web applications. </li>
   <li><b>The upload photo feature was added</b>: Users can upload a profile photo after registration and can also upload an image when creating a post, allowing them to personalize their posts and make them more engaging.</li>
   <li><b>The comment section</b>: The comment section allows authenticated users to comment on any post, while non-authenticated users can only view comments. This feature provides an interactive platform for users to engage with one another and share their thoughts and opinions</li>
   <li><b>The message feature</b>: The messaging feature allows authenticated users to communicate with one another securely. This feature provides users with a convenient and reliable way to stay in touch with one another.</li>
