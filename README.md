@@ -57,6 +57,7 @@ https://user-images.githubusercontent.com/100721103/200149633-373db975-c47f-43a7
       </ul>
     </li>    
     <li><a href="#shots">Shots</a></li>
+    <li><a href="#update-made">Update Made</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -176,7 +177,17 @@ Python3: [Get Python](https://www.python.org/downloads/)
 <p align="right"><a href="#readme-top">back to top</a></p>
 
 ---
+<!-- Update made -->
+## Update made
 
+<ul>
+  <li>The upload photo feature was added: Users can upload a profile photo after registration and can also upload an image when creating a post, allowing them to personalize their posts and make them more engaging.</li>
+  <li>The comment section: The comment section allows authenticated users to comment on any post, while non-authenticated users can only view comments. This feature provides an interactive platform for users to engage with one another and share their thoughts and opinions</li>
+  <li>The message feature: The messaging feature allows authenticated users to communicate with one another securely. This feature provides users with a convenient and reliable way to stay in touch with one another.</li>
+  <li>Reset password feature: The Reset Password feature allows users to create a new password if they have forgotten their previous one. This feature provides users with a convenient way to regain access to their accounts without having to contact customer service.</li>
+</ul>
+
+---
 <!-- Contact -->
 
 ## Contact
