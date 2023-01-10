@@ -181,10 +181,10 @@ Python3: [Get Python](https://www.python.org/downloads/)
 ## Update made
 
 <ul>
-  <li>The upload photo feature was added: Users can upload a profile photo after registration and can also upload an image when creating a post, allowing them to personalize their posts and make them more engaging.</li>
-  <li>The comment section: The comment section allows authenticated users to comment on any post, while non-authenticated users can only view comments. This feature provides an interactive platform for users to engage with one another and share their thoughts and opinions</li>
-  <li>The message feature: The messaging feature allows authenticated users to communicate with one another securely. This feature provides users with a convenient and reliable way to stay in touch with one another.</li>
-  <li>Reset password feature: The Reset Password feature allows users to create a new password if they have forgotten their previous one. This feature provides users with a convenient way to regain access to their accounts without having to contact customer service.</li>
+  <li><b>The upload photo feature was added</b>: Users can upload a profile photo after registration and can also upload an image when creating a post, allowing them to personalize their posts and make them more engaging.</li>
+  <li><b>The comment section</b>: The comment section allows authenticated users to comment on any post, while non-authenticated users can only view comments. This feature provides an interactive platform for users to engage with one another and share their thoughts and opinions</li>
+  <li><b>The message feature</b>: The messaging feature allows authenticated users to communicate with one another securely. This feature provides users with a convenient and reliable way to stay in touch with one another.</li>
+  <li><b>Reset password feature</b>: The Reset Password feature allows users to create a new password if they have forgotten their previous one. This feature provides users with a convenient way to regain access to their accounts without having to contact customer service.</li>
 </ul>
 
 ---
