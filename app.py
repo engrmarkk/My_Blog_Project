@@ -17,8 +17,8 @@ def create_app():
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
     app.config["MAIL_PORT"] = 465
-    app.config["MAIL_USERNAME"] = "atmme1992@gmail.com"
-    app.config["MAIL_PASSWORD"] = "dvogogdoinarpugn"
+    app.config["MAIL_USERNAME"] = os.environ.get("EMAIL_USER")
+    app.config["MAIL_PASSWORD"] = os.environ.get("EMAIL_PASS")
     app.config["MAIL_USE_TLS"] = False
     app.config["MAIL_USE_SSL"] = True
 
