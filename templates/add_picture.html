@@ -6,12 +6,12 @@ background: none;
 " onclick="history.back()"><i class="fa fas fa-backspace text-muted h4"></i>&nbsp; Go back</button>
 
 <div class="m-auto d-flex justify-content-center">
-    {% if current_user.photo == 'user.png' %}
+    {% if not current_user.photo %}
     <img class="rounded-circle article-img my-5 w-50"
-        src="{{ url_for('static', filename='images/profile/' + current_user.photo) }}">
+        src="{{ url_for('static', filename='images/profile/user.png') }}">
       {% else %}
       <img class="rounded-circle article-img my-5"
-        src="{{ url_for('static', filename='images/profile/' +current_user.photo) }}">
+        src="{{ current_user.photo }}">
       {% endif %}
 </div>
 
