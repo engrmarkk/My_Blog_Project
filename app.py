@@ -4,6 +4,9 @@ from extensions import app, db, login_manager, mail
 from models import User
 from routes import view, auth
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def create_app():
