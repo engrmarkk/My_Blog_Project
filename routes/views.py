@@ -7,6 +7,10 @@ from form import PostForm, UpdateForm, ContactForm, DmForm, PhotoForm, CommentFo
 from models import Post, User, DmModel, CommentModel
 from datetime import datetime
 from routes.func import save_image, save_post_image
+import cloudinary
+import os
+import cloudinary.uploader
+import cloudinary_config
 
 
 view = Blueprint("view", __name__)
@@ -51,7 +55,14 @@ def account():
         post_content = form.post_content.data
         f = form.image.data
         if f:
-            image_file = save_post_image(f)
+            # image_file = save_post_image(f)
+            result = cloudinary.uploader.upload(
+                f,
+                transformation=[{"width": 176, "height": 176, "crop": "fill"}],
+                folder=f"Blog/posts/{current_user.last_name} {current_user.first_name}",
+            )
+
+            image_file = result["secure_url"]
         else:
             image_file = ''
         # Create an instance of the Post model
@@ -217,7 +228,15 @@ def add_photo():
             if not f:
                 flash('nothing to upload', 'danger')
                 return redirect(url_for('view.add_photo'))
-            image_file = save_image(f)
+            # image_file = save_image(f)
+            result = cloudinary.uploader.upload(
+                f,
+                transformation=[{"width": 176, "height": 176, "crop": "fill"}],
+                folder=f"Blog/profile/{current_user.last_name} {current_user.first_name}",
+                public_id=current_user.username
+            )
+
+            image_file = result["secure_url"]
             user.photo = image_file
             db.session.commit()
             flash('Profile photo uploaded successfully', 'success')
