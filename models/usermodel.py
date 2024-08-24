@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     # The email column in the User table in the database, we don't want this column to be empty, hence setting the nullable to false,
     # we also don't want a two or more users to have the same email, that resulted to setting the unique to be True
     email = db.Column(db.String(70), unique=True, nullable=False)
-    photo = db.Column(db.String(100), nullable=False, default='user.png')
+    photo = db.Column(db.Text, nullable=False, default='')
     # The password column in the User table in the database, we don't want this column to be empty, hence setting the nullable to false,
     password = db.Column(db.String(60), nullable=False)
     # This is not a column in the database, it's a relationship that binds the user table to the post table,
