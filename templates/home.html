@@ -99,7 +99,7 @@ border: 1px solid rgb(147, 139, 139);
     {% if post.photo %}
     <div class="mt-1">
       <img class=" article-img img-thumbnail w-100" style="height: 15rem;"
-      src="{{ url_for('static', filename='images/post/' + post.photo) }}">
+      src="{{ post.photo }}">
     </div>
     {% else %}
     <div class="mt-1">
