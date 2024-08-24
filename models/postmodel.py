@@ -11,7 +11,7 @@ class Post(db.Model, UserMixin):
     title = db.Column(db.String(100), nullable=False)
     # The date and time column for each post, the default value is set to be the current time at which a post is being committed to the database
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    photo = db.Column(db.String(100), nullable=False, default='')
+    photo = db.Column(db.Text, nullable=False, default='')
     # The content column in the Post table in the database, we don't want this column to be empty, hence setting the nullable to false
     content = db.Column(db.Text, nullable=False)
     # This column is used to access the user of a particular post, it takes the id of the user of the post
