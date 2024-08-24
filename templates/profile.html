@@ -20,12 +20,12 @@ onclick="history.back()"
     "
   >
   <div class="d-flex align-items-end">
-    {% if user.photo == 'user.png' %}
+    {% if not user.photo %}
     <img class="rounded-circle article-img my-5 w-50"
-        src="{{ url_for('static', filename='images/profile/' + user.photo) }}">
+        src="{{ url_for('static', filename='images/profile/user.png') }}">
       {% else %}
       <img class="rounded img-thumbnail article-img my-5"
-        src="{{ url_for('static', filename='images/profile/' + user.photo) }}">
+        src="{{ user.photo }}">
       {% endif %}
     {% if current_user.id == user.id %}
     <a href="{{ url_for('view.add_photo') }}" 
