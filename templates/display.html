@@ -17,7 +17,7 @@ background: none;
     {% if post.author.photo %}
       <img class="rounded-circle article-img"
       style="width: 5rem;"
-      src="{{ url_for('static', filename='images/profile/' + post.author.photo) }}">
+      src="{{ post.author.photo }}">
       {% else %}
       <img
         style="width: 4rem"
@@ -59,7 +59,7 @@ background: none;
   {% if post.photo %}
   <div class="mt-4">
     <img class=" article-img img-thumbnail"
-    src="{{ url_for('static', filename='images/post/' + post.photo) }}">
+    src="{{ post.photo }}">
   </div>
   {% endif %}
 
