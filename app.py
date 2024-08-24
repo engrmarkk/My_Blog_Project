@@ -1,6 +1,6 @@
 # The imported classes, functions nd object from the dependencies for this project
 from flask import url_for, redirect, flash
-from extensions import app, db, login_manager, mail
+from extensions import app, db, login_manager, mail, migrate
 from models import User
 from routes import view, auth
 import os
@@ -16,7 +16,7 @@ def create_app():
     # The configuration for the track modification
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     # The configuration to set up a secret key to strengthen the security of your database
-    app.config["SECRET_KEY"] = '026b0eb800ec2934fb5cf2e7'
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     app.config["MAIL_SERVER"] = "smtp.gmail.com"
     app.config["MAIL_PORT"] = 465
@@ -30,6 +30,7 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    migrate.init_app(app, db)
 
     # The decorator that loads the user using the user's id
     @login_manager.user_loader
