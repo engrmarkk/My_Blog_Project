@@ -128,3 +128,4 @@ dmypy.json
 .pyre/
 .gitignore
 node_modules
+config.bat
